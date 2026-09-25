@@ -39,19 +39,17 @@ export default function VirtualGallery() {
       {/* Header Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
         
-        {/* Accent Tag with Horizontal Gold Lines */}
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <div className="w-12 sm:w-16 h-[1px] bg-[#c5a059]" />
-          <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930]">
+        {/* Accent Tag (Clean, Without Side Lines) */}
+        <div className="mb-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a]">
             VISUAL SPLENDOR
           </span>
-          <div className="w-12 sm:w-16 h-[1px] bg-[#c5a059]" />
         </div>
 
         {/* Main Title */}
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-gray-900 tracking-wide mb-2">
           <span className="text-[#111e2e] font-bold">ROYAL</span>{" "}
-          <span className="text-[#c5a059]">PHOTO & MEDIA GALLERY</span>
+          <span className="text-[#16a34a]">PHOTO & MEDIA GALLERY</span>
         </h2>
 
         {/* Subtitle */}
@@ -65,7 +63,7 @@ export default function VirtualGallery() {
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`text-xs sm:text-sm tracking-widest uppercase transition-all pb-2 font-medium relative ${
+              className={`text-xs sm:text-sm tracking-widest uppercase transition-all pb-2 font-medium relative cursor-pointer ${
                 activeTab === cat
                   ? "text-gray-900 font-bold"
                   : "text-gray-500 hover:text-gray-900"
@@ -73,7 +71,7 @@ export default function VirtualGallery() {
             >
               {cat}
               {activeTab === cat && (
-                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#c5a059]" />
+                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#16a34a]" />
               )}
             </button>
           ))}
@@ -110,7 +108,7 @@ export default function VirtualGallery() {
 
               {/* Top Right Enlarge Icon */}
               <div className="absolute top-4 right-4 p-2 rounded-none bg-white/90 text-gray-900 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <Maximize2 className="w-4 h-4 text-[#c5a059]" />
+                <Maximize2 className="w-4 h-4 text-[#16a34a]" />
               </div>
 
               {/* Bottom Left Title (Fixed white color without text color change on hover) */}
@@ -134,7 +132,7 @@ export default function VirtualGallery() {
             onClick={() => setActiveImage(null)}
             className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md p-4 flex items-center justify-center cursor-pointer"
           >
-            <div className="relative max-w-5xl w-full h-[80vh] overflow-hidden border border-[#c5a059]/40">
+            <div className="relative max-w-5xl w-full h-[80vh] overflow-hidden border border-[#16a34a]/40">
               <Image
                 src={activeImage}
                 alt="Enlarged view"

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Mail, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, Phone, ChevronRight, ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   onOpenBooking: (experience?: string) => void;
@@ -84,8 +84,6 @@ export default function Header({ onOpenBooking }: HeaderProps) {
     {
       label: "EXPERIENCES",
       href: "#weddings",
-      hasDropdown: true,
-      subItems: experienceItems,
     },
     { label: "GALLERY", href: "#gallery" },
     { label: "CONTACT", href: "#enquire" },
@@ -119,41 +117,91 @@ export default function Header({ onOpenBooking }: HeaderProps) {
 
             {/* Center: Clean Navbar Links */}
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={`text-sm sm:text-[15px] font-bold tracking-wider uppercase transition-colors py-1 relative group flex items-center gap-1.5 ${
-                    isScrolled
-                      ? "text-gray-900 hover:text-[#c5a059]"
-                      : "text-white hover:text-[#f5c767] drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {item.hasDropdown && (
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform ${
-                        isScrolled ? "text-gray-600" : "text-white/80"
-                      } group-hover:translate-y-0.5`}
-                    />
-                  )}
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#c5a059] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
+              {navItems.map((item) =>
+                item.hasDropdown ? (
+                  <div
+                    key={item.label}
+                    className="relative"
+                    onMouseEnter={() => setActiveDropdown(item.label)}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                  >
+                    {/* Trigger */}
+                    <a
+                      href={item.href}
+                      onClick={(e) => handleScrollTo(e, item.href)}
+                      className={`text-sm sm:text-[15px] font-bold tracking-wider uppercase transition-colors py-1 relative group flex items-center gap-1 ${
+                        isScrolled
+                          ? "text-gray-900 hover:text-[#16a34a]"
+                          : "text-white hover:text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          activeDropdown === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                      <span className={`absolute bottom-0 left-0 h-[2px] bg-[#16a34a] transition-all duration-300 ${
+                        activeDropdown === item.label ? "w-full" : "w-0 group-hover:w-full"
+                      }`} />
+                    </a>
+
+                    {/* Dropdown Panel */}
+                    <AnimatePresence>
+                      {activeDropdown === item.label && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 6 }}
+                          transition={{ duration: 0.18, ease: "easeOut" }}
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white border border-gray-100 shadow-xl z-50 overflow-hidden"
+                        >
+                          <div className="h-[3px] bg-[#16a34a] w-full" />
+                          {item.subItems!.map((sub) => (
+                            <a
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={(e) => handleScrollTo(e, sub.href)}
+                              className="flex items-center gap-2.5 px-4 py-3 text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:text-[#16a34a] hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0 group"
+                            >
+                              <span className="w-1 h-1 rounded-full bg-gray-300 group-hover:bg-[#16a34a] transition-colors shrink-0" />
+                              {sub.label}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={(e) => handleScrollTo(e, item.href)}
+                    className={`text-sm sm:text-[15px] font-bold tracking-wider uppercase transition-colors py-1 relative group flex items-center ${
+                      isScrolled
+                        ? "text-gray-900 hover:text-[#16a34a]"
+                        : "text-white hover:text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#16a34a] transition-all duration-300 group-hover:w-full" />
+                  </a>
+                )
+              )}
             </nav>
 
             {/* Right: Rectangular Call Button with Number */}
             <div className="hidden lg:flex items-center">
               <a
                 href="tel:+919876543210"
-                className={`px-4 py-2.5 rounded-none border text-xs sm:text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2.5 shadow-md group ${
+                className={`px-4 py-2.5 rounded-none border text-xs sm:text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2.5 shadow-md bg-white text-gray-900 cursor-pointer ${
                   isScrolled
-                    ? "bg-gray-900 border-gray-900 text-white hover:bg-[#c5a059] hover:border-[#c5a059]"
-                    : "bg-[#0b1726]/85 border-white/80 hover:bg-white hover:text-black hover:border-white text-white"
+                    ? "border-gray-300 hover:border-gray-400 hover:bg-gray-50"
+                    : "border-white hover:bg-gray-100"
                 }`}
               >
-                <Phone className="w-4 h-4 shrink-0 text-[#c5a059] group-hover:text-inherit transition-colors" />
-                <span className="tracking-wide whitespace-nowrap">+91 98765 43210</span>
+                <Phone className="w-4 h-4 shrink-0 text-[#16a34a]" />
+                <span className="tracking-wide whitespace-nowrap font-bold text-gray-900">+91 98765 43210</span>
               </a>
             </div>
 
@@ -207,17 +255,46 @@ export default function Header({ onOpenBooking }: HeaderProps) {
                   </button>
                 </div>
 
-                <div className="py-6 space-y-4">
+                <div className="py-6 space-y-1">
                   {navItems.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between text-base font-bold text-gray-800 hover:text-[#c5a059] py-2 border-b border-gray-50"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight className="w-4 h-4 text-gray-400" />
-                    </a>
+                    <div key={item.label}>
+                      <button
+                        onClick={(e) => {
+                          if (item.hasDropdown) {
+                            setOpenMobileAccordion(
+                              openMobileAccordion === item.label ? null : item.label
+                            );
+                          } else {
+                            handleScrollTo(e as unknown as React.MouseEvent<HTMLAnchorElement>, item.href);
+                          }
+                        }}
+                        className="w-full flex items-center justify-between text-base font-bold text-gray-800 hover:text-[#16a34a] py-3 border-b border-gray-100 cursor-pointer"
+                      >
+                        <span>{item.label}</span>
+                        {item.hasDropdown ? (
+                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${
+                            openMobileAccordion === item.label ? "rotate-180 text-[#16a34a]" : ""
+                          }`} />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-gray-400" />
+                        )}
+                      </button>
+                      {item.hasDropdown && openMobileAccordion === item.label && (
+                        <div className="pl-4 pb-2 space-y-1 border-b border-gray-100">
+                          {item.subItems!.map((sub) => (
+                            <a
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={(e) => handleScrollTo(e, sub.href)}
+                              className="flex items-center gap-2 py-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-[#16a34a] transition-colors"
+                            >
+                              <span className="w-1 h-1 rounded-full bg-gray-300" />
+                              {sub.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -225,17 +302,17 @@ export default function Header({ onOpenBooking }: HeaderProps) {
               <div className="pt-6 border-t border-gray-100 space-y-3">
                 <a
                   href="tel:+919876543210"
-                  className="w-full py-3 px-4 bg-gray-900 hover:bg-[#c5a059] text-white rounded-none border border-gray-900 flex items-center justify-center gap-2.5 text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                  className="w-full py-3 px-4 bg-white hover:bg-gray-50 text-gray-900 rounded-none border border-gray-300 flex items-center justify-center gap-2.5 text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
                 >
-                  <Phone className="w-4 h-4 text-[#c5a059]" />
-                  <span>+91 98765 43210</span>
+                  <Phone className="w-4 h-4 text-[#16a34a]" />
+                  <span className="font-bold text-gray-900">+91 98765 43210</span>
                 </a>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenBooking();
                   }}
-                  className="w-full py-3 rounded-none bg-[#c5a059] hover:bg-[#b08b46] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-colors"
+                  className="w-full py-3 rounded-none bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-colors cursor-pointer"
                 >
                   BOOK NOW
                 </button>

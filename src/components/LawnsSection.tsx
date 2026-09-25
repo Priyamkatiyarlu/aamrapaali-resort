@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { MapPin, Maximize2, Users, Crown, ArrowRight, Sparkles } from "lucide-react";
+import { MapPin, Maximize2, Users, ArrowRight, Phone, Gem, Waves, Flower2, Palette } from "lucide-react";
 
 interface LawnsSectionProps {
   onOpenBooking: (venueName?: string) => void;
@@ -21,6 +21,7 @@ const VENUES = [
     capacityLabel: "Grand Banquet Capacity",
     highlight: "Swarovski Chandeliers",
     highlightLabel: "Royal Interior Setup",
+    highlightIcon: Gem,
     image: "/images/buckingham.png",
   },
   {
@@ -34,6 +35,7 @@ const VENUES = [
     capacityLabel: "Mehendi & Sundowner",
     highlight: "Rajasthani Decor",
     highlightLabel: "Poolside Ambiance",
+    highlightIcon: Waves,
     image: "/images/waterpark.png",
   },
   {
@@ -47,6 +49,7 @@ const VENUES = [
     capacityLabel: "Nature-Inspired Wedding",
     highlight: "Floral Arches",
     highlightLabel: "Tranquil Scenic Views",
+    highlightIcon: Flower2,
     image: "/images/hero.png",
   },
   {
@@ -60,40 +63,41 @@ const VENUES = [
     capacityLabel: "Theme Wedding Capacity",
     highlight: "Thematic Lighting",
     highlightLabel: "Custom Wedding Setup",
+    highlightIcon: Palette,
     image: "/images/wedding.png",
   },
 ];
 
 export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
   return (
-    <section id="venues" className="pt-8 sm:pt-12 pb-20 bg-[#ffffff] text-gray-900 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="venues" className="py-16 sm:py-20 lg:py-24 bg-white text-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930] block mb-1">
+        {/* Section Header with generous bottom breathing room */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 lg:mb-20">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] block mb-2">
             Grand Lawns & Banquets
           </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-gray-900">
-            OUR ROYAL <span className="text-gold-gradient">VENUES & LAWNS</span>
+          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
+            OUR ROYAL <span className="text-[#16a34a]">VENUES & LAWNS</span>
           </h2>
-          <p className="text-xs sm:text-sm text-gray-600 font-sans mt-2">
+          <p className="text-xs sm:text-sm text-gray-600 font-sans mt-3 max-w-xl mx-auto">
             Discover all 4 grand wedding venues at Aamrapaali Resort & Buckingham Palace.
           </p>
         </div>
 
-        {/* ALL 4 VENUE CARDS DISPLAYED TOGETHER IN RICH VIRAJ SHOWCASE STYLE */}
-        <div className="space-y-12">
+        {/* ALL 4 VENUE SHOWCASE (SPACIOUS, SIMPLE CLEAN EDITORIAL LAYOUT) */}
+        <div className="space-y-20 lg:space-y-28">
           {VENUES.map((venue, idx) => (
             <div
               key={venue.id}
               id={venue.id}
-              className="grid grid-cols-1 lg:grid-cols-12 bg-[#fcfbf9] border border-gray-200 shadow-md rounded-none overflow-hidden hover:shadow-xl transition-shadow duration-300 scroll-mt-24"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center bg-white scroll-mt-24"
             >
-              {/* Image Side (Alternate Left/Right for rich visual variety, or standard left 6 cols) */}
+              {/* Image Side (Clean, With Space, No Cut-To-Cut) */}
               <div
-                className={`lg:col-span-6 relative w-full h-[360px] lg:h-auto min-h-[380px] rounded-none group overflow-hidden border-b lg:border-b-0 ${
-                  idx % 2 === 1 ? "lg:order-2 lg:border-l border-gray-200" : "lg:order-1 lg:border-r border-gray-200"
+                className={`lg:col-span-6 relative w-full h-[360px] sm:h-[420px] lg:h-[480px] rounded-none group overflow-hidden shadow-sm ${
+                  idx % 2 === 1 ? "lg:order-2" : "lg:order-1"
                 }`}
               >
                 <Image
@@ -102,44 +106,36 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-gray-200 flex items-center gap-1.5 shadow-sm">
-                  <Crown className="w-4 h-4 text-[#c5a059]" />
-                  <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider">
-                    Aamrapaali Wedding Venue
-                  </span>
-                </div>
               </div>
 
               {/* Text Specs & Details Side (6 cols) */}
               <div
-                className={`lg:col-span-6 p-6 sm:p-10 space-y-6 flex flex-col justify-between ${
+                className={`lg:col-span-6 space-y-6 flex flex-col justify-between py-2 ${
                   idx % 2 === 1 ? "lg:order-1" : "lg:order-2"
                 }`}
               >
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-serif text-3xl font-bold text-gray-900 mb-1">
+                    <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1.5">
                       {venue.name}
                     </h3>
-                    <p className="text-xs font-semibold text-[#9e7930] flex items-center gap-1.5 uppercase tracking-wider">
-                      <MapPin className="w-3.5 h-3.5" />
+                    <p className="text-xs font-semibold text-[#16a34a] flex items-center gap-1.5 uppercase tracking-wider">
+                      <MapPin className="w-3.5 h-3.5 text-[#16a34a]" />
                       <span>{venue.location}</span>
                     </p>
                   </div>
 
-                  {/* User Exact Venue Description */}
+                  {/* Venue Description */}
                   <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
                     {venue.desc}
                   </p>
                 </div>
 
-                {/* 3 Key Metric Columns separated by vertical lines */}
-                <div className="py-4 border-y border-gray-200 grid grid-cols-3 gap-3 text-center">
+                {/* 3 Key Metric Columns */}
+                <div className="py-4 border-y border-gray-100 grid grid-cols-3 gap-3 text-center">
                   {/* Metric 1 */}
                   <div className="space-y-1">
-                    <Maximize2 className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
+                    <Maximize2 className="w-5 h-5 text-[#16a34a] mx-auto mb-1" />
                     <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.area}
                     </div>
@@ -149,8 +145,8 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   </div>
 
                   {/* Metric 2 */}
-                  <div className="space-y-1 border-x border-gray-200 px-1">
-                    <Users className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
+                  <div className="space-y-1 border-x border-gray-100 px-1">
+                    <Users className="w-5 h-5 text-[#16a34a] mx-auto mb-1" />
                     <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.capacity}
                     </div>
@@ -161,7 +157,7 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
 
                   {/* Metric 3 */}
                   <div className="space-y-1">
-                    <Sparkles className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
+                    <venue.highlightIcon className="w-5 h-5 text-[#16a34a] mx-auto mb-1" />
                     <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.highlight}
                     </div>
@@ -171,15 +167,23 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   </div>
                 </div>
 
-                {/* Single Primary CTA Button: ENQUIRE NOW → */}
-                <div className="pt-2">
+                {/* Dual CTA Buttons: Full Width (One in green, one in white for call) */}
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                   <button
                     onClick={() => onOpenBooking(venue.name)}
-                    className="w-full sm:w-auto px-8 py-3.5 bg-[#0b1726] border border-[#0b1726] hover:bg-[#c5a059] hover:border-[#c5a059] text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md"
+                    className="w-full py-3.5 px-4 bg-[#16a34a] hover:bg-[#15803d] border border-[#16a34a] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-sm rounded-none cursor-pointer"
                   >
-                    <span>ENQUIRE NOW</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>BOOK VENUE</span>
+                    <ArrowRight className="w-4 h-4 text-white" />
                   </button>
+
+                  <a
+                    href="tel:+919876543210"
+                    className="w-full py-3.5 px-4 bg-white hover:bg-gray-50 border border-gray-300 text-gray-900 text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-sm rounded-none cursor-pointer"
+                  >
+                    <Phone className="w-4 h-4 text-[#16a34a]" />
+                    <span>CALL US</span>
+                  </a>
                 </div>
               </div>
             </div>

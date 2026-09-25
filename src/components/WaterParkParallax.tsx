@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Waves } from "lucide-react";
+import { Waves, ArrowRight } from "lucide-react";
 
 interface ParallaxSectionProps {
   onOpenBooking: (details?: string) => void;
@@ -46,9 +46,10 @@ export default function WaterParkParallax({ onOpenBooking }: ParallaxSectionProp
         <div className="pt-3">
           <button
             onClick={() => onOpenBooking("Water Park")}
-            className="px-10 py-3.5 bg-white hover:bg-[#c5a059] text-gray-900 hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none"
+            className="px-8 py-3.5 bg-white text-gray-900 border border-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none cursor-pointer inline-flex items-center gap-2.5 hover:bg-white hover:text-gray-900 hover:border-white"
           >
-            BOOK NOW
+            <span>BOOK NOW</span>
+            <ArrowRight className="w-4 h-4 text-[#16a34a] shrink-0" />
           </button>
         </div>
       </div>

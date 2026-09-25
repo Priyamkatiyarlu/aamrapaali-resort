@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { Trees, Car, Waves, Hotel } from "lucide-react";
 
 interface WhyChooseUsProps {
   onOpenBooking: (details?: string) => void;
@@ -12,103 +12,96 @@ export default function WhyChooseUs({ onOpenBooking }: WhyChooseUsProps) {
   const features = [
     {
       id: "lawns",
+      num: "01",
       badge: "EXPANSIVE GROUNDS",
       title: "Spacious Lawns",
-      description: "Beautiful and versatile lawns for weddings, celebrations and large gatherings.",
-      image: "/images/wedding.png",
+      description: "Beautiful and versatile lawns for weddings, grand celebrations, and large gatherings.",
+      icon: Trees,
     },
     {
       id: "parking",
+      num: "02",
       badge: "HASSLE-FREE ACCESS",
       title: "Ample Parking",
-      description: "Convenient parking space for guests and event attendees.",
-      image: "/images/events.png",
+      description: "Convenient and secure parking space for all your guests and event attendees.",
+      icon: Car,
     },
     {
       id: "waterpark",
+      num: "03",
       badge: "RESORT AMENITY",
       title: "Waterpark Experience",
-      description: "Add fun and entertainment to your stay with an exciting waterpark experience.",
-      image: "/images/waterpark.png",
+      description: "Add thrill, excitement, and family entertainment to your destination stay.",
+      icon: Waves,
     },
     {
       id: "rooms",
+      num: "04",
       badge: "ROYAL STAY",
       title: "100+ Comfortable Rooms",
-      description: "Convenient stay for you and your guests.",
-      image: "/images/stay.png",
+      description: "Luxurious, well-appointed suites ensuring a comfortable stay for you and your guests.",
+      icon: Hotel,
     },
   ];
 
   return (
-    <section id="why-us" className="w-full h-auto lg:h-screen lg:min-h-screen bg-[#fcfbf9] text-gray-900 border-t border-gray-200 overflow-hidden py-0">
+    <section id="why-us" className="w-full h-auto lg:h-screen lg:min-h-screen bg-white text-gray-900 border-t border-gray-100 overflow-hidden py-0">
       <div className="w-full h-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
         
-        {/* Left Column: Edge-to-Edge Full Height Image (from Navbar bottom to Viewport bottom) */}
+        {/* Left Column: Edge-to-Edge Full Height Image */}
         <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full">
           <Image
             src="/images/hero.png"
             alt="Aamrapaali Outdoor Celebration Lawn"
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-700 rounded-none"
+            className="object-cover rounded-none"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        {/* Right Column: Vertically Centered Content & Feature List */}
-        <div className="lg:col-span-6 w-full h-full flex flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-8 lg:py-10 space-y-6">
+        {/* Right Column: Vertically Centered Modern Editorial UI */}
+        <div className="lg:col-span-6 w-full h-full flex flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-10 lg:py-12 space-y-6 sm:space-y-8 bg-white">
           
-          {/* Header Content */}
-          <div className="space-y-1.5">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930] block">
+          {/* Header Content with Green Branding */}
+          <div className="space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] block">
               WHY CHOOSE US
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-bold text-gray-900 leading-tight">
               MORE THAN A VENUE, <br />
-              <span className="text-[#c5a059]">A COMPLETE EXPERIENCE</span>
+              <span className="text-[#16a34a]">A COMPLETE EXPERIENCE</span>
             </h2>
           </div>
 
-          {/* Feature Rows */}
-          <div className="divide-y divide-gray-200/80 pt-1">
+          {/* Feature Rows (No Images, No Buttons, Clean Modern UI) */}
+          <div className="divide-y divide-gray-100">
             {features.map((item) => (
-              <div key={item.id} className="py-3 sm:py-3.5 flex items-center justify-between gap-4 group">
-                
-                {/* Left: Thumbnail & Content */}
-                <div className="flex items-center gap-4">
-                  {/* Thumbnail Image (sharp corners) */}
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-none overflow-hidden border border-gray-200 shadow-sm">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+              <div
+                key={item.id}
+                className="py-4 sm:py-5 flex items-start justify-between gap-6 group hover:bg-gray-50/50 px-2 sm:px-3 -mx-2 sm:-mx-3 rounded-none transition-colors"
+              >
+                {/* Left: Icon & Text Content */}
+                <div className="flex items-start gap-4 sm:gap-5">
+                  <div className="shrink-0 text-[#16a34a] pt-1">
+                    <item.icon className="w-6 h-6 stroke-[1.75]" />
                   </div>
 
                   {/* Text Details */}
-                  <div className="space-y-0.5 max-w-xs sm:max-w-sm lg:max-w-md">
-                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#9e7930] block">
+                  <div className="space-y-1">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#16a34a] block">
                       {item.badge}
                     </span>
-                    <h3 className="font-serif text-sm sm:text-base font-bold text-gray-900 group-hover:text-[#9e7930] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-gray-600 font-sans leading-snug line-clamp-2">
+                    <p className="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed max-w-md">
                       {item.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Right: Explore Features Link */}
-                <button
-                  onClick={() => onOpenBooking(item.title)}
-                  className="shrink-0 text-xs sm:text-sm font-medium text-[#9e7930] hover:text-[#7c5e21] transition-colors flex items-center gap-1.5 pb-0.5 border-b border-[#9e7930]/40 hover:border-[#9e7930]"
-                >
-                  <span>Explore Features</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                {/* Right: Subtle Luxury Number Accent */}
+                <span className="text-2xl sm:text-3xl font-serif text-gray-300 group-hover:text-[#16a34a]/40 transition-colors font-light ml-2 shrink-0 select-none">
+                  {item.num}
+                </span>
               </div>
             ))}
           </div>

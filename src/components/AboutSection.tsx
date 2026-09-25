@@ -16,16 +16,16 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
         {/* Centered Storytelling & Narrative Header */}
         <div className="max-w-4xl mx-auto text-center space-y-6 mb-8 sm:mb-10">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] block mb-2">
               About Aamrapaali Group
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              WHERE ROYAL <span className="text-gold-gradient">HERITAGE MEETS</span> LUXURY
+              WHERE ROYAL <span className="text-[#16a34a]">HERITAGE MEETS</span> LUXURY
             </h2>
           </div>
 
           {/* Sub-heading */}
-          <p className="text-base sm:text-xl text-[#9e7930] font-serif font-semibold italic">
+          <p className="text-base sm:text-xl text-[#16a34a] font-serif font-semibold">
             A Legacy of Architectural Splendor, Celebrations & Unrivaled Hospitality
           </p>
 
@@ -43,18 +43,18 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button
               onClick={() => onOpenBooking("About Aamrapaali")}
-              className="px-8 py-4 bg-[#0b1726] border border-[#0b1726] hover:bg-[#c5a059] hover:border-[#c5a059] text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="px-8 py-4 bg-[#16a34a] border border-[#16a34a] hover:bg-[#15803d] hover:border-[#15803d] text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-lg rounded-none cursor-pointer"
             >
               <span>ABOUT AAMRAPAALI</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-white" />
             </button>
 
             <a
               href="#buckingham"
-              className="px-8 py-4 bg-white border border-gray-400 hover:border-[#c5a059] hover:text-[#c5a059] text-gray-900 text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              className="px-8 py-4 bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md rounded-none cursor-pointer"
             >
               <span>BUCKINGHAM TOUR</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-[#16a34a]" />
             </a>
           </div>
         </div>
@@ -70,20 +70,17 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
           title="AAMRAPAALI GRAND ESTATE"
           scrollHint="Scroll to expand video"
           useWindowScroll={true}
-          startWidth={65}
-          startHeight={60}
-          startRadius={20}
+          startWidth={70}
+          startHeight={100}
+          startRadius={0}
           endRadius={0}
-          mediaZoom={1.2}
-          scrollDistance={1.0}
-          holdDistance={0.05}
+          mediaZoom={1.15}
+          scrollDistance={0.8}
+          holdDistance={0}
           smoothing={0.08}
           overlayScrim={0.5}
         >
           <div className="text-center text-white space-y-4 px-4">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-[#c5a059]/60 text-xs font-bold text-[#f2d488] uppercase tracking-wider shadow-lg">
-              Official Estate Tour
-            </span>
             <h3 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-wide text-white drop-shadow-md">
               AAMRAPAALI GRAND ESTATE
             </h3>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Sparkles } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 
 interface ParallaxSectionProps {
   onOpenBooking: (details?: string) => void;
@@ -24,7 +24,7 @@ export default function WeddingsCelebrationsParallax({ onOpenBooking }: Parallax
         
         {/* Top Icon without Background */}
         <div className="flex items-center justify-center mx-auto transition-transform hover:scale-110 duration-300">
-          <Sparkles className="w-10 h-10 text-white stroke-[1.5] drop-shadow-md" />
+          <Heart className="w-10 h-10 text-white stroke-[1.5] drop-shadow-md" />
         </div>
 
         {/* Title */}
@@ -42,13 +42,14 @@ export default function WeddingsCelebrationsParallax({ onOpenBooking }: Parallax
           Celebrate your <strong className="font-semibold text-white">engagement</strong>, <strong className="font-semibold text-white">Mehendi</strong>, <strong className="font-semibold text-white">Haldi</strong>, <strong className="font-semibold text-white">Sangeet</strong>, <strong className="font-semibold text-white">wedding ceremony</strong>, <strong className="font-semibold text-white">and reception</strong> in beautifully designed spaces that can be tailored to your vision. Our versatile venues, thoughtful décor, and warm ambience create an experience that feels personal, elegant, and truly special.
         </p>
 
-        {/* CTA Button (Sharp Non-Rounded Button) */}
+        {/* CTA Button (White background, green arrow, no color change on hover) */}
         <div className="pt-4">
           <button
             onClick={() => onOpenBooking("Weddings & Celebrations")}
-            className="px-10 py-3.5 bg-white hover:bg-[#c5a059] text-gray-900 hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none"
+            className="px-8 py-3.5 bg-white text-gray-900 border border-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none cursor-pointer inline-flex items-center gap-2.5 hover:bg-white hover:text-gray-900 hover:border-white"
           >
-            BOOK NOW
+            <span>BOOK NOW</span>
+            <ArrowRight className="w-4 h-4 text-[#16a34a] shrink-0" />
           </button>
         </div>
       </div>

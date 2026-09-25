@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 
 const REVIEWS = [
@@ -76,6 +77,17 @@ const REVIEWS = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-advance reviews and images every 5 seconds
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % REVIEWS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex, isPaused]);
+
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % REVIEWS.length);
   };
@@ -90,42 +102,62 @@ export default function Testimonials() {
     <section id="testimonials" className="w-full h-auto lg:h-screen lg:min-h-screen bg-[#fcfbf9] text-gray-900 border-t border-gray-200 overflow-hidden py-0">
       <div className="w-full h-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
         
-        {/* Left Column: Full Viewport Height Full-Bleed Image */}
-        <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full">
-          <Image
-            src={current.image}
-            alt={current.venue}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-700 rounded-none"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+        {/* Left Column: Full Viewport Height Full-Bleed Image with Seamless Crossfade */}
+        <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full overflow-hidden bg-black">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={current.image}
+                alt={current.venue}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+            </motion.div>
+          </AnimatePresence>
           
-          {/* Bottom Left Venue Label Overlay */}
-          <div className="absolute bottom-6 left-6 text-white space-y-0.5 pointer-events-none">
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-[2px] bg-[#c5a059]"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#f5d78a]">
-                {current.venue}
-              </span>
-            </div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-200 pl-7">
-              {current.resort}
-            </p>
-          </div>
+          {/* Bottom Left Venue Label Overlay with Smooth Crossfade */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`label-${current.id}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="absolute bottom-6 left-6 text-white space-y-0.5 pointer-events-none z-10"
+            >
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-[2px] bg-[#16a34a]"></span>
+                <span className="text-xs font-bold uppercase tracking-widest text-white">
+                  {current.venue}
+                </span>
+              </div>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-200 pl-7">
+                {current.resort}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Right Column: Vertically Centered Header, Active Card & Navigation */}
         <div className="lg:col-span-6 w-full h-full flex flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-8 lg:py-10 space-y-6">
           
-          {/* Header Content */}
+          {/* Header Content with Green Branding */}
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930] block">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] block">
               GUEST TESTIMONIALS
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-bold text-gray-900 leading-tight">
               REAL STORIES, <br />
-              <span className="text-[#c5a059]">LASTING MEMORIES</span>
+              <span className="text-[#16a34a]">LASTING MEMORIES</span>
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed pt-1 max-w-lg">
               Hear from families, couples and guests who celebrated unforgettable moments at Aamrapaali.
@@ -136,7 +168,21 @@ export default function Testimonials() {
           <div className="flex items-center gap-4 sm:gap-6 pt-2">
             
             {/* White Testimonial Card */}
-            <div className="flex-1 bg-white border border-gray-200 p-6 sm:p-8 rounded-none shadow-sm space-y-6 relative">
+            <div
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              className="flex-1 bg-white border border-gray-200 p-6 sm:p-8 rounded-none shadow-sm space-y-6 relative overflow-hidden"
+            >
+              {/* Auto-advance timer progress line */}
+              <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gray-100">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ width: "0%" }}
+                  animate={{ width: isPaused ? undefined : "100%" }}
+                  transition={{ duration: 5, ease: "linear" }}
+                  className="h-full bg-[#16a34a]"
+                />
+              </div>
               
               {/* Top Row: Google Reviews Badge */}
               <div className="flex items-center justify-between">
@@ -193,35 +239,44 @@ export default function Testimonials() {
                 </a>
               </div>
 
-              {/* Quote Text */}
-              <div className="relative">
-                <span className="text-4xl sm:text-5xl font-serif text-[#c5a059]/40 leading-none absolute -top-4 -left-2 pointer-events-none">
-                  “
-                </span>
-                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans relative z-10 pt-1">
-                  "{current.text}"
-                </p>
-              </div>
+              {/* Quote & Author Info Animated Smoothly */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`content-${current.id}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.45, ease: "easeInOut" }}
+                  className="space-y-6"
+                >
+                  {/* Quote Text */}
+                  <div>
+                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
+                      {current.text}
+                    </p>
+                  </div>
 
-              {/* Author Info */}
-              <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
-                <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-gray-200">
-                  <Image
-                    src={current.avatar}
-                    alt={current.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h5 className="font-sans text-sm font-bold text-gray-900">
-                    {current.name}
-                  </h5>
-                  <p className="text-[11px] text-gray-500 font-medium">
-                    {current.role} • {current.date}
-                  </p>
-                </div>
-              </div>
+                  {/* Author Info */}
+                  <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
+                    <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-gray-200">
+                      <Image
+                        src={current.avatar}
+                        alt={current.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h5 className="font-sans text-sm font-bold text-gray-900">
+                        {current.name}
+                      </h5>
+                      <p className="text-[11px] text-gray-500 font-medium">
+                        {current.role} • {current.date}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
             </div>
 
@@ -230,18 +285,18 @@ export default function Testimonials() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous testimonial"
-                className="w-10 h-10 rounded-full border border-gray-300 hover:border-[#c5a059] bg-white text-gray-700 hover:text-[#c5a059] flex items-center justify-center transition-all shadow-sm"
+                className="w-10 h-10 rounded-full border border-gray-300 hover:border-[#16a34a] bg-white text-gray-700 hover:text-[#16a34a] flex items-center justify-center transition-all shadow-sm cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
 
-              {/* Vertical Gold Accent Line */}
+              {/* Vertical Accent Line */}
               <div className="w-[1px] h-8 bg-gray-300" />
 
               <button
                 onClick={handleNext}
                 aria-label="Next testimonial"
-                className="w-10 h-10 rounded-full border border-gray-300 hover:border-[#c5a059] bg-white text-gray-700 hover:text-[#c5a059] flex items-center justify-center transition-all shadow-sm"
+                className="w-10 h-10 rounded-full border border-gray-300 hover:border-[#16a34a] bg-white text-gray-700 hover:text-[#16a34a] flex items-center justify-center transition-all shadow-sm cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
