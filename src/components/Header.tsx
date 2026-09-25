@@ -98,15 +98,15 @@ export default function Header({ onOpenBooking }: HeaderProps) {
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm text-gray-900 py-3"
-            : "bg-gradient-to-b from-black/80 via-black/30 to-transparent py-4 text-white"
+            ? "bg-white/95 backdrop-blur-md shadow-sm text-gray-900 py-2.5"
+            : "bg-gradient-to-b from-black/85 via-black/40 to-transparent py-3 text-white"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Left: Official Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 shrink-0 transition-transform group-hover:scale-105">
+            <Link href="/" className="flex items-center gap-3 group py-1">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 transition-transform group-hover:scale-105 drop-shadow-md">
                 <Image
                   src="/images/logo.png"
                   alt="Aamrapaali Official Logo"
@@ -117,105 +117,43 @@ export default function Header({ onOpenBooking }: HeaderProps) {
               </div>
             </Link>
 
-            {/* Center: Desktop Navigation */}
+            {/* Center: Clean Navbar Links */}
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-              {navItems.map((item) => {
-                if (item.hasDropdown) {
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative group"
-                      onMouseEnter={() => setActiveDropdown(item.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <a
-                        href={item.href}
-                        onClick={(e) => handleScrollTo(e, item.href)}
-                        className={`text-[11px] xl:text-xs font-semibold tracking-widest uppercase transition-colors py-2 relative flex items-center gap-1 ${
-                          isScrolled
-                            ? "text-gray-800 hover:text-[#c5a059]"
-                            : "text-white/90 hover:text-white"
-                        }`}
-                      >
-                        <span>{item.label}</span>
-                        <ChevronDown
-                          className={`w-3 h-3 transition-transform duration-200 ${
-                            activeDropdown === item.label ? "rotate-180 text-[#c5a059]" : ""
-                          } ${isScrolled ? "text-gray-500" : "text-white/70"}`}
-                        />
-                      </a>
-
-                      {/* Clean Dropdown Menu without header bar or subtext */}
-                      <AnimatePresence>
-                        {activeDropdown === item.label && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 mt-1 w-56 bg-white/98 backdrop-blur-lg border border-gray-200 shadow-2xl rounded-lg overflow-hidden py-1.5 text-gray-900 z-50"
-                          >
-                            {item.subItems?.map((subItem) => (
-                              <a
-                                key={subItem.label}
-                                href={subItem.href}
-                                onClick={(e) => handleScrollTo(e, subItem.href)}
-                                className="group/item px-4 py-2.5 flex items-center justify-between hover:bg-[#f8f5ee] transition-colors border-b border-gray-50 last:border-0"
-                              >
-                                <span className="text-xs font-bold text-gray-800 group-hover/item:text-[#c5a059] transition-colors uppercase tracking-wider">
-                                  {subItem.label}
-                                </span>
-                                <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover/item:text-[#c5a059] group-hover/item:translate-x-0.5 transition-all" />
-                              </a>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={(e) => handleScrollTo(e, item.href)}
-                    className={`text-[11px] xl:text-xs font-semibold tracking-widest uppercase transition-colors py-1 relative group flex items-center gap-1 ${
-                      isScrolled
-                        ? "text-gray-800 hover:text-[#c5a059]"
-                        : "text-white/90 hover:text-white"
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                  </a>
-                );
-              })}
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={`text-sm sm:text-[15px] font-bold tracking-wider uppercase transition-colors py-1 relative group flex items-center gap-1.5 ${
+                    isScrolled
+                      ? "text-gray-900 hover:text-[#c5a059]"
+                      : "text-white hover:text-[#f5c767] drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {item.hasDropdown && (
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform ${
+                        isScrolled ? "text-gray-600" : "text-white/80"
+                      } group-hover:translate-y-0.5`}
+                    />
+                  )}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#c5a059] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ))}
             </nav>
 
-            {/* Right: Circular Phone & Mail Icon Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
+            {/* Right: Rectangular Call Button with Number */}
+            <div className="hidden lg:flex items-center">
               <a
                 href="tel:+919876543210"
-                aria-label="Call Us"
-                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-md ${
+                className={`px-4 py-2.5 rounded-none border text-xs sm:text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2.5 shadow-md group ${
                   isScrolled
-                    ? "bg-gray-100 text-gray-800 border-gray-200 hover:bg-[#c5a059] hover:text-white hover:border-[#c5a059]"
-                    : "bg-[#111e2e]/80 text-white border-white/20 hover:bg-[#c5a059] hover:border-[#c5a059]"
+                    ? "bg-gray-900 border-gray-900 text-white hover:bg-[#c5a059] hover:border-[#c5a059]"
+                    : "bg-[#0b1726]/85 border-white/80 hover:bg-white hover:text-black hover:border-white text-white"
                 }`}
               >
-                <Phone className="w-4 h-4" />
-              </a>
-
-              <a
-                href="mailto:info@aamrapaali.com"
-                aria-label="Email Us"
-                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-md ${
-                  isScrolled
-                    ? "bg-gray-100 text-gray-800 border-gray-200 hover:bg-[#c5a059] hover:text-white hover:border-[#c5a059]"
-                    : "bg-[#111e2e]/80 text-white border-white/20 hover:bg-[#c5a059] hover:border-[#c5a059]"
-                }`}
-              >
-                <Mail className="w-4 h-4" />
+                <Phone className="w-4 h-4 shrink-0 text-[#c5a059] group-hover:text-inherit transition-colors" />
+                <span className="tracking-wide whitespace-nowrap">+91 98765 43210</span>
               </a>
             </div>
 
@@ -253,7 +191,7 @@ export default function Header({ onOpenBooking }: HeaderProps) {
             >
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-gray-100">
-                  <div className="relative w-12 h-12">
+                  <div className="relative w-16 h-16">
                     <Image
                       src="/images/logo.png"
                       alt="Aamrapaali Official Logo"
@@ -269,87 +207,37 @@ export default function Header({ onOpenBooking }: HeaderProps) {
                   </button>
                 </div>
 
-                <div className="py-6 space-y-2">
-                  {navItems.map((item) => {
-                    if (item.hasDropdown) {
-                      return (
-                        <div key={item.label} className="border-b border-gray-50 py-2">
-                          <div className="flex items-center justify-between">
-                            <a
-                              href={item.href}
-                              onClick={(e) => handleScrollTo(e, item.href)}
-                              className="text-sm font-bold text-gray-800 hover:text-[#c5a059]"
-                            >
-                              {item.label}
-                            </a>
-                            <button
-                              onClick={() =>
-                                setOpenMobileAccordion(
-                                  openMobileAccordion === item.label ? null : item.label
-                                )
-                              }
-                              className="p-1.5 text-gray-500 hover:text-gray-900"
-                              aria-label={`Toggle ${item.label} dropdown`}
-                            >
-                              <ChevronDown
-                                className={`w-4 h-4 transition-transform duration-200 ${
-                                  openMobileAccordion === item.label
-                                    ? "rotate-180 text-[#c5a059]"
-                                    : ""
-                                }`}
-                              />
-                            </button>
-                          </div>
-
-                          <AnimatePresence>
-                            {openMobileAccordion === item.label && (
-                              <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                className="pl-4 mt-2 space-y-2 border-l-2 border-[#c5a059]/40 overflow-hidden"
-                              >
-                                {item.subItems?.map((subItem) => (
-                                  <a
-                                    key={subItem.label}
-                                    href={subItem.href}
-                                    onClick={(e) => handleScrollTo(e, subItem.href)}
-                                    className="block py-1.5 text-xs font-bold text-gray-700 hover:text-[#c5a059] uppercase tracking-wider"
-                                  >
-                                    {subItem.label}
-                                  </a>
-                                ))}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        onClick={(e) => handleScrollTo(e, item.href)}
-                        className="flex items-center justify-between text-sm font-bold text-gray-800 hover:text-[#c5a059] py-2 border-b border-gray-50"
-                      >
-                        <span>{item.label}</span>
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
-                      </a>
-                    );
-                  })}
+                <div className="py-6 space-y-4">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between text-base font-bold text-gray-800 hover:text-[#c5a059] py-2 border-b border-gray-50"
+                    >
+                      <span>{item.label}</span>
+                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                    </a>
+                  ))}
                 </div>
               </div>
 
               <div className="pt-6 border-t border-gray-100 space-y-3">
+                <a
+                  href="tel:+919876543210"
+                  className="w-full py-3 px-4 bg-gray-900 hover:bg-[#c5a059] text-white rounded-none border border-gray-900 flex items-center justify-center gap-2.5 text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                >
+                  <Phone className="w-4 h-4 text-[#c5a059]" />
+                  <span>+91 98765 43210</span>
+                </a>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenBooking();
                   }}
-                  className="w-full py-3 rounded-full bg-[#c5a059] text-white text-xs font-bold uppercase tracking-wider shadow-lg"
+                  className="w-full py-3 rounded-none bg-[#c5a059] hover:bg-[#b08b46] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-colors"
                 >
-                  Reserve Venue / Stay
+                  BOOK NOW
                 </button>
               </div>
             </motion.div>

@@ -83,21 +83,21 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-0"></div>
 
       {/* 2. Left Side Dark Shadow ONLY behind left text column */}
-      <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-[45%] bg-gradient-to-r from-black/85 via-black/50 to-transparent pointer-events-none z-0"></div>
+      <div className="absolute inset-y-0 left-0 w-full sm:w-3/4 lg:w-[55%] bg-gradient-to-r from-black/90 via-black/60 to-transparent pointer-events-none z-0"></div>
 
       {/* 3. Bottom Gradient for Pagination Dots */}
       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/70 to-transparent pointer-events-none z-0"></div>
 
       {/* HERO TEXT CONTENT (EXACT VIRAJ TYPOGRAPHY & LAYOUT) */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-auto w-full">
-        <div className="max-w-xl">
+        <div className="max-w-2xl">
           {/* Line 1: Sans-Serif Clean Font (Viraj 'BBD' Style) */}
           <motion.h2
             key={`line1-${slide.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-wider uppercase text-white leading-tight"
+            className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-wider uppercase text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
             {slide.line1}
           </motion.h2>
@@ -108,34 +108,34 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-serif text-4xl sm:text-6xl lg:text-6xl font-normal tracking-wide uppercase text-white leading-tight mb-4"
+            className="font-serif text-4xl sm:text-6xl lg:text-6xl font-normal tracking-wide uppercase text-white leading-tight mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
             {slide.line2}
           </motion.h1>
 
-          {/* Subtitle in Warm Yellow/Gold (Viraj Style) */}
+          {/* Subtitle in Warm Yellow/Gold (Prominent & Highly Legible) */}
           <motion.p
             key={`subtitle-${slide.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-sm sm:text-base text-[#d4af37] font-sans font-medium mb-3"
+            className="text-base sm:text-xl lg:text-2xl text-[#f5c767] font-sans font-semibold mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] tracking-wide"
           >
             {slide.subtitle}
           </motion.p>
 
-          {/* Feature Line with Pipe Separators (Viraj Style) */}
+          {/* Feature Line with Pipe Separators (Larger & Clear Readability) */}
           <motion.p
             key={`feature-${slide.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-xs sm:text-xs text-gray-200 font-semibold tracking-wide mb-8 leading-relaxed max-w-lg"
+            className="text-sm sm:text-base lg:text-lg text-white/95 font-medium tracking-wide mb-8 leading-relaxed max-w-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
           >
             {slide.featureLine}
           </motion.p>
 
-          {/* Single Rectangular Outlined Button (Exact Viraj KNOW MORE -> Button) */}
+          {/* Single Rectangular Outlined Button (BOOK NOW CTA) */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,10 +143,10 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
           >
             <button
               onClick={() => onOpenBooking(slide.line1)}
-              className="px-6 py-2.5 bg-[#0b1726]/80 border border-white/90 hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2.5 group shadow-lg"
+              className="px-7 py-3 bg-[#0b1726]/85 border border-white/90 hover:bg-white hover:text-black text-white text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2.5 group shadow-xl rounded-none"
             >
-              <span>KNOW MORE</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <span>BOOK NOW</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
         </div>
