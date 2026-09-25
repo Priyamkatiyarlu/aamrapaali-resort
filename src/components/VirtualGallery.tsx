@@ -6,21 +6,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2 } from "lucide-react";
 
 const GALLERY_ITEMS = [
-  { id: 1, title: "Presidential Royal Suite", category: "Stays", image: "/images/stay.png" },
-  { id: 2, title: "Aamrapaali Heritage Palace", category: "Resort", image: "/images/hero.png" },
-  { id: 3, title: "Royal Sangeet & Gala", category: "Weddings", image: "/images/events.png" },
-  { id: 4, title: "Buckingham Palace Hall", category: "Palace", image: "/images/buckingham.png" },
-  { id: 5, title: "Imperial Fine Dining", category: "Dining", image: "/images/dining.png" },
-  { id: 6, title: "Royal Mandap Wedding Lawn", category: "Weddings", image: "/images/wedding.png" },
-  { id: 7, title: "Tropical Wave Pool", category: "Waterpark", image: "/images/waterpark.png" },
-  { id: 8, title: "Heritage Palace Gardens", category: "Resort", image: "/images/hero.png" },
-  { id: 9, title: "Grand Banquet Ballroom", category: "Palace", image: "/images/buckingham.png" },
-  { id: 10, title: "Luxury Pool Cottage", category: "Stays", image: "/images/stay.png" },
-  { id: 11, title: "Royal Banquet Dining", category: "Dining", image: "/images/dining.png" },
-  { id: 12, title: "Aqua World Water Slides", category: "Waterpark", image: "/images/waterpark.png" },
+  { id: 1,  title: "Grand Wedding Ceremony",      category: "Wedding",    image: "/images/wedding.png" },
+  { id: 2,  title: "Buckingham Palace Mandap",    category: "Wedding",    image: "/images/buckingham.png" },
+  { id: 3,  title: "Haldi Celebration Lawn",      category: "Haldi",     image: "/images/hero.png" },
+  { id: 4,  title: "Royal Haldi Ceremony",        category: "Haldi",     image: "/images/stay.png" },
+  { id: 5,  title: "Poolside Mehandi Evening",    category: "Mehandi",   image: "/images/waterpark.png" },
+  { id: 6,  title: "Heritage Mehandi Decor",      category: "Mehandi",   image: "/images/events.png" },
+  { id: 7,  title: "Royal Sangeet Gala Night",    category: "Sangeet",   image: "/images/events.png" },
+  { id: 8,  title: "Vilas Lawn Sangeet Stage",    category: "Sangeet",   image: "/images/hero.png" },
+  { id: 9,  title: "Grand Reception Banquet",     category: "Reception", image: "/images/buckingham.png" },
+  { id: 10, title: "Candlelight Reception Hall",  category: "Reception", image: "/images/dining.png" },
+  { id: 11, title: "Engagement Ring Ceremony",    category: "Engagement",image: "/images/wedding.png" },
+  { id: 12, title: "Poolside Engagement Setup",   category: "Engagement",image: "/images/waterpark.png" },
 ];
 
-const CATEGORIES = ["ALL", "RESORT", "PALACE", "WEDDINGS", "WATERPARK", "STAYS", "DINING"];
+const CATEGORIES = ["ALL", "WEDDING", "HALDI", "MEHANDI", "SANGEET", "RECEPTION", "ENGAGEMENT"];
 
 export default function VirtualGallery() {
   const [activeTab, setActiveTab] = useState("ALL");
