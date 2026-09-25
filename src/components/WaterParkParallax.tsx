@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Waves } from "lucide-react";
 
 interface ParallaxSectionProps {
   onOpenBooking: (details?: string) => void;
@@ -9,6 +10,7 @@ interface ParallaxSectionProps {
 export default function WaterParkParallax({ onOpenBooking }: ParallaxSectionProps) {
   return (
     <section
+      id="waterpark"
       className="relative py-28 sm:py-36 bg-fixed bg-cover bg-center text-white overflow-hidden"
       style={{
         backgroundImage: "url('/images/waterpark.png')",
@@ -20,15 +22,9 @@ export default function WaterParkParallax({ onOpenBooking }: ParallaxSectionProp
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
         
-        {/* Top Circular Emblem Icon */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-[#7c2d12] flex items-center justify-center mx-auto shadow-2xl transition-transform hover:scale-105 border border-amber-100/50">
-          <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#7c2d12]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 4h4v16" />
-            <path d="M4 8h4M4 12h4M4 16h4" />
-            <path d="M8 6c6 0 6 8 12 8v2" />
-            <path d="M2 18c2.5 1 5.5 1 8 0s5.5-1 8 0" />
-            <path d="M2 21c2.5 1 5.5 1 8 0s5.5-1 8 0" />
-          </svg>
+        {/* Top Icon without Background */}
+        <div className="flex items-center justify-center mx-auto transition-transform hover:scale-110 duration-300">
+          <Waves className="w-10 h-10 text-white stroke-[1.5] drop-shadow-md" />
         </div>
 
         {/* Section Title */}
@@ -46,11 +42,11 @@ export default function WaterParkParallax({ onOpenBooking }: ParallaxSectionProp
           With vibrant water attractions and a lively atmosphere, our Water Park is the perfect place to turn an ordinary day into an exciting getaway. <strong className="font-bold text-white">Gather your family and friends, make a splash, and create unforgettable memories at Aamrapaali Resort.</strong>
         </p>
 
-        {/* CTA Pill Button */}
+        {/* CTA Button */}
         <div className="pt-3">
           <button
             onClick={() => onOpenBooking("Water Park")}
-            className="px-8 py-3 rounded-full bg-white hover:bg-[#c5a059] text-[#7c2d12] hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl"
+            className="px-10 py-3.5 bg-white hover:bg-[#c5a059] text-gray-900 hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none"
           >
             BOOK NOW
           </button>

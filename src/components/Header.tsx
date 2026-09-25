@@ -12,13 +12,35 @@ interface HeaderProps {
 
 export default function Header({ onOpenBooking }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 40);
+
+      const offsetHeight = 120;
+      if (currentScrollY > offsetHeight) {
+        if (currentScrollY > lastScrollY) {
+          // Scrolling DOWN (top to bottom) -> Hide navbar
+          setIsVisible(false);
+        } else if (currentScrollY < lastScrollY) {
+          // Scrolling UP (bottom to top) -> Show navbar
+          setIsVisible(true);
+        }
+      } else {
+        // At top of page -> Always visible
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,9 +56,11 @@ export default function Header({ onOpenBooking }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        } ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-gray-200 py-3 shadow-md text-gray-900"
+            ? "bg-white/95 backdrop-blur-md shadow-sm text-gray-900 py-3"
             : "bg-gradient-to-b from-black/80 via-black/30 to-transparent py-4 text-white"
         }`}
       >
@@ -55,7 +79,7 @@ export default function Header({ onOpenBooking }: HeaderProps) {
               </div>
             </Link>
 
-            {/* Center: Clean Navbar Links like Viraj */}
+            {/* Center: Clean Navbar Links */}
             <nav className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <a
@@ -69,19 +93,27 @@ export default function Header({ onOpenBooking }: HeaderProps) {
                 >
                   <span>{item.label}</span>
                   {item.hasDropdown && (
-                    <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition-transform" />
+                    <ChevronDown
+                      className={`w-3 h-3 transition-transform ${
+                        isScrolled ? "text-gray-500" : "text-white/70"
+                      } group-hover:translate-y-0.5`}
+                    />
                   )}
                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#c5a059] transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
             </nav>
 
-            {/* Right: Circular Phone & Mail Icon Buttons (Exact Viraj style) */}
+            {/* Right: Circular Phone & Mail Icon Buttons */}
             <div className="hidden lg:flex items-center gap-3">
               <a
                 href="tel:+919876543210"
                 aria-label="Call Us"
-                className="w-10 h-10 rounded-full bg-[#111e2e]/80 border border-white/20 text-white flex items-center justify-center hover:bg-[#c5a059] hover:border-[#c5a059] transition-all shadow-md"
+                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-md ${
+                  isScrolled
+                    ? "bg-gray-100 text-gray-800 border-gray-200 hover:bg-[#c5a059] hover:text-white hover:border-[#c5a059]"
+                    : "bg-[#111e2e]/80 text-white border-white/20 hover:bg-[#c5a059] hover:border-[#c5a059]"
+                }`}
               >
                 <Phone className="w-4 h-4" />
               </a>
@@ -89,7 +121,11 @@ export default function Header({ onOpenBooking }: HeaderProps) {
               <a
                 href="mailto:info@aamrapaali.com"
                 aria-label="Email Us"
-                className="w-10 h-10 rounded-full bg-[#111e2e]/80 border border-white/20 text-white flex items-center justify-center hover:bg-[#c5a059] hover:border-[#c5a059] transition-all shadow-md"
+                className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all shadow-md ${
+                  isScrolled
+                    ? "bg-gray-100 text-gray-800 border-gray-200 hover:bg-[#c5a059] hover:text-white hover:border-[#c5a059]"
+                    : "bg-[#111e2e]/80 text-white border-white/20 hover:bg-[#c5a059] hover:border-[#c5a059]"
+                }`}
               >
                 <Mail className="w-4 h-4" />
               </a>

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Trees, Car, Waves, Bed, ArrowRight, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface WhyChooseUsProps {
   onOpenBooking: (details?: string) => void;
@@ -10,114 +11,108 @@ interface WhyChooseUsProps {
 export default function WhyChooseUs({ onOpenBooking }: WhyChooseUsProps) {
   const features = [
     {
-      icon: Trees,
-      title: "Spacious Lawns",
-      subtitle: "VERSATILE CELEBRATION VENUES",
-      description:
-        "Beautiful and versatile lawns for weddings, celebrations and large gatherings.",
+      id: "lawns",
       badge: "EXPANSIVE GROUNDS",
+      title: "Spacious Lawns",
+      description: "Beautiful and versatile lawns for weddings, celebrations and large gatherings.",
+      image: "/images/wedding.png",
     },
     {
-      icon: Car,
-      title: "Ample Parking",
-      subtitle: "CONVENIENT GUEST PARKING",
-      description:
-        "Convenient parking space for guests and event attendees.",
+      id: "parking",
       badge: "HASSLE-FREE ACCESS",
+      title: "Ample Parking",
+      description: "Convenient parking space for guests and event attendees.",
+      image: "/images/events.png",
     },
     {
-      icon: Waves,
-      title: "Waterpark Experience",
-      subtitle: "FUN & ENTERTAINMENT",
-      description:
-        "Add fun and entertainment to your stay with an exciting waterpark experience.",
+      id: "waterpark",
       badge: "RESORT AMENITY",
+      title: "Waterpark Experience",
+      description: "Add fun and entertainment to your stay with an exciting waterpark experience.",
+      image: "/images/waterpark.png",
     },
     {
-      icon: Bed,
-      title: "100+ Comfortable Rooms",
-      subtitle: "LUXURY ACCOMMODATIONS",
-      description:
-        "Convenient stay for you and your guests.",
+      id: "rooms",
       badge: "ROYAL STAY",
+      title: "100+ Comfortable Rooms",
+      description: "Convenient stay for you and your guests.",
+      image: "/images/stay.png",
     },
   ];
 
   return (
-    <section id="why-choose-us" className="py-24 bg-[#faf8f5] text-[#1a1a1a] relative overflow-hidden border-t border-[#e5dfd5]">
-      {/* Background Subtle Ambient Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-radial from-[#c5a059]/5 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="why-us" className="w-full h-auto lg:h-screen lg:min-h-screen bg-[#fcfbf9] text-gray-900 border-t border-gray-200 overflow-hidden py-0">
+      <div className="w-full h-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-[#8c6b27] text-xs font-semibold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>The Aamrapaali Advantage</span>
-          </div>
-
-          <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#1a1a1a] tracking-tight leading-tight">
-            Why Choose <span className="italic text-[#c5a059]">Aamrapaali Resort</span>
-          </h2>
-
-          <p className="text-gray-600 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
-            Where regal architecture meets warm Indian hospitality. We transform your milestone celebrations into unforgettable royal memories with world-class facilities and unmatched service.
-          </p>
-          
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#c5a059] to-transparent mx-auto pt-2" />
+        {/* Left Column: Edge-to-Edge Full Height Image (from Navbar bottom to Viewport bottom) */}
+        <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full">
+          <Image
+            src="/images/hero.png"
+            alt="Aamrapaali Outdoor Celebration Lawn"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700 rounded-none"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        {/* Feature Cards Grid (Matching reference UI UX) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((item, index) => {
-            const IconComponent = item.icon;
-            return (
-              <div
-                key={index}
-                className="group relative bg-white border border-[#e5dfd5] p-8 rounded-xl shadow-sm hover:shadow-2xl hover:border-[#c5a059]/60 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
-              >
-                {/* Top Subtle Gold Accent Line */}
-                <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-[#c5a059]/0 group-hover:via-[#c5a059] to-transparent transition-all duration-500" />
+        {/* Right Column: Vertically Centered Content & Feature List */}
+        <div className="lg:col-span-6 w-full h-full flex flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-8 lg:py-10 space-y-6">
+          
+          {/* Header Content */}
+          <div className="space-y-1.5">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#9e7930] block">
+              WHY CHOOSE US
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[38px] xl:text-[44px] font-bold text-gray-900 leading-tight">
+              MORE THAN A VENUE, <br />
+              <span className="text-[#c5a059]">A COMPLETE EXPERIENCE</span>
+            </h2>
+          </div>
 
-                <div>
-                  {/* Top Row: Icon on left, Badge on right */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-lg bg-[#faf6ef] text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-white flex items-center justify-center transition-colors duration-300 shadow-inner">
-                      <IconComponent className="w-7 h-7" />
-                    </div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-3 py-1 rounded-full bg-[#faf6ef] text-[#8c6b27] border border-[#e8dfcf] group-hover:border-[#c5a059]/40 transition-colors">
-                      {item.badge}
-                    </span>
+          {/* Feature Rows */}
+          <div className="divide-y divide-gray-200/80 pt-1">
+            {features.map((item) => (
+              <div key={item.id} className="py-3 sm:py-3.5 flex items-center justify-between gap-4 group">
+                
+                {/* Left: Thumbnail & Content */}
+                <div className="flex items-center gap-4">
+                  {/* Thumbnail Image (sharp corners) */}
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-none overflow-hidden border border-gray-200 shadow-sm">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-serif text-2xl text-[#1a1a1a] font-normal group-hover:text-[#8c6b27] transition-colors mb-1">
-                    {item.title}
-                  </h3>
-
-                  {/* Subtitle */}
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#c5a059] mb-3">
-                    {item.subtitle}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-sm text-gray-600 font-light leading-relaxed mb-6">
-                    {item.description}
-                  </p>
+                  {/* Text Details */}
+                  <div className="space-y-0.5 max-w-xs sm:max-w-sm lg:max-w-md">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#9e7930] block">
+                      {item.badge}
+                    </span>
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-gray-900 group-hover:text-[#9e7930] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] sm:text-xs text-gray-600 font-sans leading-snug line-clamp-2">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Bottom Action Link */}
+                {/* Right: Explore Features Link */}
                 <button
-                  onClick={() => onOpenBooking(`Inquiry about ${item.title}`)}
-                  className="pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-[#8c6b27] group-hover:text-[#1a1a1a] transition-colors w-full text-left"
+                  onClick={() => onOpenBooking(item.title)}
+                  className="shrink-0 text-xs sm:text-sm font-medium text-[#9e7930] hover:text-[#7c5e21] transition-colors flex items-center gap-1.5 pb-0.5 border-b border-[#9e7930]/40 hover:border-[#9e7930]"
                 >
-                  <span>Explore Feature</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <span>Explore Features</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
         </div>
 
       </div>

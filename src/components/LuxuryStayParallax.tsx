@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Crown } from "lucide-react";
 
 interface ParallaxSectionProps {
   onOpenBooking: (details?: string) => void;
@@ -9,6 +10,7 @@ interface ParallaxSectionProps {
 export default function LuxuryStayParallax({ onOpenBooking }: ParallaxSectionProps) {
   return (
     <section
+      id="stays"
       className="relative py-28 sm:py-36 bg-fixed bg-cover bg-center text-white overflow-hidden"
       style={{
         backgroundImage: "url('/images/stay.png')",
@@ -20,13 +22,9 @@ export default function LuxuryStayParallax({ onOpenBooking }: ParallaxSectionPro
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
         
-        {/* Top Circular Emblem Icon */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white text-[#7c2d12] flex items-center justify-center mx-auto shadow-2xl transition-transform hover:scale-105 border border-amber-100/50">
-          <svg className="w-8 h-8 sm:w-9 sm:h-9 text-[#7c2d12]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M2 4v16M2 8h20v12M2 14h20" />
-            <path d="M6 14V9a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v5" />
-            <path d="M8 8V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
-          </svg>
+        {/* Top Icon without Background */}
+        <div className="flex items-center justify-center mx-auto transition-transform hover:scale-110 duration-300">
+          <Crown className="w-10 h-10 text-white stroke-[1.5] drop-shadow-md" />
         </div>
 
         {/* Section Heading */}
@@ -44,11 +42,11 @@ export default function LuxuryStayParallax({ onOpenBooking }: ParallaxSectionPro
           From comfortable furnishings to essential modern conveniences, every detail is designed to make your stay effortless and enjoyable. Whether you&apos;re visiting for a wedding, family gathering, business occasion, or a quiet getaway, <strong className="font-bold text-white">Aamrapaali Resort offers a comfortable retreat where you can relax, recharge, and feel at home.</strong>
         </p>
 
-        {/* CTA Pill Button */}
+        {/* CTA Button */}
         <div className="pt-3">
           <button
             onClick={() => onOpenBooking("Luxury Stay")}
-            className="px-8 py-3 rounded-full bg-white hover:bg-[#c5a059] text-[#7c2d12] hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl"
+            className="px-10 py-3.5 bg-white hover:bg-[#c5a059] text-gray-900 hover:text-white text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-xl rounded-none"
           >
             BOOK NOW
           </button>

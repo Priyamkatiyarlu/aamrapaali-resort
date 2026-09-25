@@ -66,8 +66,8 @@ const VENUES = [
 
 export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
   return (
-    <section id="lawns" className="py-20 bg-[#ffffff] text-gray-900 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="venues" className="pt-8 sm:pt-12 pb-20 bg-[#ffffff] text-gray-900 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
@@ -87,7 +87,8 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
           {VENUES.map((venue, idx) => (
             <div
               key={venue.id}
-              className="grid grid-cols-1 lg:grid-cols-12 bg-[#fcfbf9] border border-gray-200 shadow-md rounded-none overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              id={venue.id}
+              className="grid grid-cols-1 lg:grid-cols-12 bg-[#fcfbf9] border border-gray-200 shadow-md rounded-none overflow-hidden hover:shadow-xl transition-shadow duration-300 scroll-mt-24"
             >
               {/* Image Side (Alternate Left/Right for rich visual variety, or standard left 6 cols) */}
               <div

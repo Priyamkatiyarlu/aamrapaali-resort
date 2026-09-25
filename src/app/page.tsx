@@ -10,9 +10,9 @@ import LuxuryStayParallax from "@/components/LuxuryStayParallax";
 import EventsGatheringsParallax from "@/components/EventsGatheringsParallax";
 import WaterParkParallax from "@/components/WaterParkParallax";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import ExperienceExplorer from "@/components/ExperienceExplorer";
 import VirtualGallery from "@/components/VirtualGallery";
 import Testimonials from "@/components/Testimonials";
+import EnquirySection from "@/components/EnquirySection";
 import ReservationModal from "@/components/ReservationModal";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import Footer from "@/components/Footer";
@@ -42,23 +42,23 @@ export default function Home() {
       {/* Lawns & Venues Showcase Section */}
       <LawnsSection onOpenBooking={handleOpenBooking} />
 
-      {/* Parallax Content Sections (bdevtestservers style) */}
+      {/* Parallax Content Sections */}
       <WeddingsCelebrationsParallax onOpenBooking={handleOpenBooking} />
-      <LuxuryStayParallax onOpenBooking={handleOpenBooking} />
       <EventsGatheringsParallax onOpenBooking={handleOpenBooking} />
+      <LuxuryStayParallax onOpenBooking={handleOpenBooking} />
       <WaterParkParallax onOpenBooking={handleOpenBooking} />
 
       {/* Why Choose Us Section */}
       <WhyChooseUs onOpenBooking={handleOpenBooking} />
-
-      {/* Curated Experience Explorer */}
-      <ExperienceExplorer onOpenBooking={handleOpenBooking} />
 
       {/* Virtual Media Gallery */}
       <VirtualGallery />
 
       {/* Guest Reviews & Testimonials */}
       <Testimonials />
+
+      {/* Full-Width Enquiry Section */}
+      <EnquirySection onOpenBooking={handleOpenBooking} />
 
       {/* Footer */}
       <Footer />
