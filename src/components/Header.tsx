@@ -14,6 +14,8 @@ export default function Header({ onOpenBooking }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMobileAccordion, setOpenMobileAccordion] = useState<string | null>("VENUES");
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -44,13 +46,49 @@ export default function Header({ onOpenBooking }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Clean 5-item navbar like Viraj
-  const navItems = [
-    { label: "ABOUT US", href: "#about", hasDropdown: true },
-    { label: "VENUES", href: "#buckingham" },
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
+    e.preventDefault();
+    const id = targetId.replace("#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -75;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const venueItems = [
+    { label: "BUCKINGHAM PALACE", href: "#buckingham" },
+    { label: "POOLSIDE LAWN", href: "#poolside-lawn" },
+    { label: "VILAS LAWN", href: "#vilas-lawn" },
+    { label: "THEME LAWN", href: "#theme-lawn" },
+  ];
+
+  const experienceItems = [
     { label: "ROYAL WEDDINGS", href: "#weddings" },
+    { label: "EVENTS & GATHERINGS", href: "#events" },
+    { label: "LUXURY STAYS", href: "#stays" },
     { label: "WATERPARK", href: "#waterpark" },
-    { label: "CONTACT", href: "#footer" },
+  ];
+
+  const navItems = [
+    { label: "ABOUT US", href: "#about" },
+    {
+      label: "VENUES",
+      href: "#venues",
+      hasDropdown: true,
+      subItems: venueItems,
+    },
+    {
+      label: "EXPERIENCES",
+      href: "#weddings",
+      hasDropdown: true,
+      subItems: experienceItems,
+    },
+    { label: "GALLERY", href: "#gallery" },
+    { label: "CONTACT", href: "#enquire" },
   ];
 
   return (
@@ -79,29 +117,79 @@ export default function Header({ onOpenBooking }: HeaderProps) {
               </div>
             </Link>
 
-            {/* Center: Clean Navbar Links */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={`text-xs font-semibold tracking-widest uppercase transition-colors py-1 relative group flex items-center gap-1 ${
-                    isScrolled
-                      ? "text-gray-800 hover:text-[#c5a059]"
-                      : "text-white/90 hover:text-white"
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {item.hasDropdown && (
-                    <ChevronDown
-                      className={`w-3 h-3 transition-transform ${
-                        isScrolled ? "text-gray-500" : "text-white/70"
-                      } group-hover:translate-y-0.5`}
-                    />
-                  )}
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#c5a059] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
+            {/* Center: Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+              {navItems.map((item) => {
+                if (item.hasDropdown) {
+                  return (
+                    <div
+                      key={item.label}
+                      className="relative group"
+                      onMouseEnter={() => setActiveDropdown(item.label)}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <a
+                        href={item.href}
+                        onClick={(e) => handleScrollTo(e, item.href)}
+                        className={`text-[11px] xl:text-xs font-semibold tracking-widest uppercase transition-colors py-2 relative flex items-center gap-1 ${
+                          isScrolled
+                            ? "text-gray-800 hover:text-[#c5a059]"
+                            : "text-white/90 hover:text-white"
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          className={`w-3 h-3 transition-transform duration-200 ${
+                            activeDropdown === item.label ? "rotate-180 text-[#c5a059]" : ""
+                          } ${isScrolled ? "text-gray-500" : "text-white/70"}`}
+                        />
+                      </a>
+
+                      {/* Clean Dropdown Menu without header bar or subtext */}
+                      <AnimatePresence>
+                        {activeDropdown === item.label && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                            transition={{ duration: 0.15 }}
+                            className="absolute top-full left-0 mt-1 w-56 bg-white/98 backdrop-blur-lg border border-gray-200 shadow-2xl rounded-lg overflow-hidden py-1.5 text-gray-900 z-50"
+                          >
+                            {item.subItems?.map((subItem) => (
+                              <a
+                                key={subItem.label}
+                                href={subItem.href}
+                                onClick={(e) => handleScrollTo(e, subItem.href)}
+                                className="group/item px-4 py-2.5 flex items-center justify-between hover:bg-[#f8f5ee] transition-colors border-b border-gray-50 last:border-0"
+                              >
+                                <span className="text-xs font-bold text-gray-800 group-hover/item:text-[#c5a059] transition-colors uppercase tracking-wider">
+                                  {subItem.label}
+                                </span>
+                                <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover/item:text-[#c5a059] group-hover/item:translate-x-0.5 transition-all" />
+                              </a>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={(e) => handleScrollTo(e, item.href)}
+                    className={`text-[11px] xl:text-xs font-semibold tracking-widest uppercase transition-colors py-1 relative group flex items-center gap-1 ${
+                      isScrolled
+                        ? "text-gray-800 hover:text-[#c5a059]"
+                        : "text-white/90 hover:text-white"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Right: Circular Phone & Mail Icon Buttons */}
@@ -181,18 +269,75 @@ export default function Header({ onOpenBooking }: HeaderProps) {
                   </button>
                 </div>
 
-                <div className="py-6 space-y-4">
-                  {navItems.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between text-sm font-bold text-gray-800 hover:text-[#c5a059] py-2 border-b border-gray-50"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight className="w-4 h-4 text-gray-400" />
-                    </a>
-                  ))}
+                <div className="py-6 space-y-2">
+                  {navItems.map((item) => {
+                    if (item.hasDropdown) {
+                      return (
+                        <div key={item.label} className="border-b border-gray-50 py-2">
+                          <div className="flex items-center justify-between">
+                            <a
+                              href={item.href}
+                              onClick={(e) => handleScrollTo(e, item.href)}
+                              className="text-sm font-bold text-gray-800 hover:text-[#c5a059]"
+                            >
+                              {item.label}
+                            </a>
+                            <button
+                              onClick={() =>
+                                setOpenMobileAccordion(
+                                  openMobileAccordion === item.label ? null : item.label
+                                )
+                              }
+                              className="p-1.5 text-gray-500 hover:text-gray-900"
+                              aria-label={`Toggle ${item.label} dropdown`}
+                            >
+                              <ChevronDown
+                                className={`w-4 h-4 transition-transform duration-200 ${
+                                  openMobileAccordion === item.label
+                                    ? "rotate-180 text-[#c5a059]"
+                                    : ""
+                                }`}
+                              />
+                            </button>
+                          </div>
+
+                          <AnimatePresence>
+                            {openMobileAccordion === item.label && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="pl-4 mt-2 space-y-2 border-l-2 border-[#c5a059]/40 overflow-hidden"
+                              >
+                                {item.subItems?.map((subItem) => (
+                                  <a
+                                    key={subItem.label}
+                                    href={subItem.href}
+                                    onClick={(e) => handleScrollTo(e, subItem.href)}
+                                    className="block py-1.5 text-xs font-bold text-gray-700 hover:text-[#c5a059] uppercase tracking-wider"
+                                  >
+                                    {subItem.label}
+                                  </a>
+                                ))}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => handleScrollTo(e, item.href)}
+                        className="flex items-center justify-between text-sm font-bold text-gray-800 hover:text-[#c5a059] py-2 border-b border-gray-50"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -214,3 +359,5 @@ export default function Header({ onOpenBooking }: HeaderProps) {
     </>
   );
 }
+
+

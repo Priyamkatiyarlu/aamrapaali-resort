@@ -140,7 +140,7 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   {/* Metric 1 */}
                   <div className="space-y-1">
                     <Maximize2 className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
-                    <div className="font-serif text-base font-bold text-gray-900">
+                    <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.area}
                     </div>
                     <div className="text-[10px] text-gray-500 font-medium">
@@ -151,7 +151,7 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   {/* Metric 2 */}
                   <div className="space-y-1 border-x border-gray-200 px-1">
                     <Users className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
-                    <div className="font-serif text-base font-bold text-gray-900">
+                    <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.capacity}
                     </div>
                     <div className="text-[10px] text-gray-500 font-medium">
@@ -162,7 +162,7 @@ export default function LawnsSection({ onOpenBooking }: LawnsSectionProps) {
                   {/* Metric 3 */}
                   <div className="space-y-1">
                     <Sparkles className="w-5 h-5 text-[#c5a059] mx-auto mb-1" />
-                    <div className="font-serif text-base font-bold text-gray-900">
+                    <div className="font-sans text-sm sm:text-base font-bold text-gray-900">
                       {venue.highlight}
                     </div>
                     <div className="text-[10px] text-gray-500 font-medium">
