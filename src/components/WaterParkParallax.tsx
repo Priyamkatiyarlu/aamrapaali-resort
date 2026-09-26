@@ -13,7 +13,7 @@ export default function WaterParkParallax({ onOpenBooking }: ParallaxSectionProp
       id="waterpark"
       className="relative py-28 sm:py-36 bg-fixed bg-cover bg-center text-white overflow-hidden"
       style={{
-        backgroundImage: "url('/images/waterpark.png')",
+        backgroundImage: "url('/images/Water Park.png')",
       }}
     >
       {/* Dark Cyan/Navy Tint Overlay for Water Park Theme */}

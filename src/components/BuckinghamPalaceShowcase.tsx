@@ -16,7 +16,7 @@ const SETUPS = [
     capacity: "Up to 5,000 Guests",
     area: "35,000 sq ft Indoor + 50,000 sq ft Lawn",
     desc: "Grand royal wedding configuration featuring a central elevated mandap, golden stage, bridal walkway, and luxury buffet zones.",
-    image: "/images/buckingham.png",
+    image: "/images/BUCKINGHAM PALACE Drone shot.png",
   },
   {
     id: "corporate-gala",
@@ -24,7 +24,7 @@ const SETUPS = [
     capacity: "Up to 4,000 Theater Seating",
     area: "Pillar-less Acoustic Ballroom",
     desc: "Equipped with ultra-high resolution LED screens, concert acoustics, stage rigging, and VIP lounge seating.",
-    image: "/images/hero.png",
+    image: "/images/BUCKINGHAM PALACE front.png",
   },
   {
     id: "luxury-reception",

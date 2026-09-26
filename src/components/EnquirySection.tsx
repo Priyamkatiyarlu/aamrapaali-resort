@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
@@ -227,7 +227,7 @@ export default function EnquirySection({ onOpenBooking }: EnquirySectionProps) {
         {/* Right Column: Featured Full Bleed Image */}
         <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full">
           <Image
-            src="/images/hero.png"
+            src="/images/BUCKINGHAM PALACE front.png"
             alt="Plan Your Perfect Celebration at Aamrapaali"
             fill
             className="object-cover rounded-none"

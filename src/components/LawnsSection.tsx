@@ -22,7 +22,7 @@ const VENUES = [
     highlight: "Swarovski Chandeliers",
     highlightLabel: "Royal Interior Setup",
     highlightIcon: Gem,
-    image: "/images/buckingham.png",
+    image: "/images/BUCKINGHAM PALACE front.png",
   },
   {
     id: "poolside-lawn",
@@ -36,7 +36,7 @@ const VENUES = [
     highlight: "Rajasthani Decor",
     highlightLabel: "Poolside Ambiance",
     highlightIcon: Waves,
-    image: "/images/waterpark.png",
+    image: "/images/Water Park.png",
   },
   {
     id: "vilas-lawn",
@@ -50,7 +50,7 @@ const VENUES = [
     highlight: "Floral Arches",
     highlightLabel: "Tranquil Scenic Views",
     highlightIcon: Flower2,
-    image: "/images/hero.png",
+    image: "/images/Amrapaali.png",
   },
   {
     id: "theme-lawn",

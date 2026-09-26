@@ -66,7 +66,7 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
         <ScrollExpand
           src="https://vjs.zencdn.net/v/oceans.mp4"
           mediaType="video"
-          poster="/images/buckingham.png"
+          poster="/images/BUCKINGHAM PALACE Drone shot.png"
           title="AAMRAPAALI GRAND ESTATE"
           scrollHint="Scroll to expand video"
           useWindowScroll={true}

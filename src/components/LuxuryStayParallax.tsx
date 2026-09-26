@@ -13,7 +13,7 @@ export default function LuxuryStayParallax({ onOpenBooking }: ParallaxSectionPro
       id="stays"
       className="relative py-28 sm:py-36 bg-fixed bg-cover bg-center text-white overflow-hidden"
       style={{
-        backgroundImage: "url('/images/stay.png')",
+        backgroundImage: "url('/images/Luxury Stay Room inside.png')",
       }}
     >
       {/* Dark Vignette Overlay for Parallax Effect & Optimal Text Contrast */}

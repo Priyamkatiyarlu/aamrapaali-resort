@@ -47,7 +47,7 @@ export default function WaterparkHighlight({ onOpenBooking }: WaterparkProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
           <div className="lg:col-span-6 relative h-[400px] sm:h-[480px] rounded-3xl overflow-hidden border border-gray-200 shadow-xl group">
             <Image
-              src="/images/waterpark.png"
+              src="/images/Water Park.png"
               alt="Aamrapaali Water Park"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"

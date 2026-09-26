@@ -51,7 +51,7 @@ export default function WhyChooseUs({ onOpenBooking }: WhyChooseUsProps) {
         {/* Left Column: Edge-to-Edge Full Height Image */}
         <div className="lg:col-span-6 relative w-full h-[450px] sm:h-[550px] lg:h-full">
           <Image
-            src="/images/hero.png"
+            src="/images/Amrapaali.png"
             alt="Aamrapaali Outdoor Celebration Lawn"
             fill
             className="object-cover rounded-none"

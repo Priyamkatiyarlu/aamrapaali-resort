@@ -16,7 +16,7 @@ const HERO_SLIDES = [
     line2: "RESORT & PALACE",
     subtitle: "A Whole new world beyond four walls",
     featureLine: "Buckingham Palace  |  Royal Weddings  |  Waterpark & Fun World  |  Luxury Hotel Suites",
-    image: "/images/hero.png",
+    image: "/images/Amrapaali.png",
   },
   {
     id: "buckingham-hero",
@@ -24,7 +24,7 @@ const HERO_SLIDES = [
     line2: "PALACE BALLROOM",
     subtitle: "India's crown jewel grand venue",
     featureLine: "35,000 Sq Ft Ballroom  |  Swarovski Chandeliers  |  5,000+ Capacity  |  VIP Bridal Suites",
-    image: "/images/buckingham.png",
+    image: "/images/BUCKINGHAM PALACE front.png",
   },
   {
     id: "weddings-hero",
@@ -40,7 +40,7 @@ const HERO_SLIDES = [
     line2: "& FUN WORLD",
     subtitle: "Ultimate summer thrill & family fun oasis",
     featureLine: "10,000 Sq Ft Wave Pool  |  High-Speed Tornado Slides  |  Kids Water Fort  |  Poolside Cabanas",
-    image: "/images/waterpark.png",
+    image: "/images/Water Park.png",
   },
 ];
 
